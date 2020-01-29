@@ -1,0 +1,62 @@
+Git commands for working command 
+
+git clone path/of/repository
+E.g. git clone https://vikas645@bitbucket.org/jumboapps/import-export.git
+
+Or you can copy directly from the git repository where your repository exists.
+
+After this command a new directory created in our local system
+Open terminal for that path where repository created.
+git status  to check the modification and other changes in the files which we have worked on.
+git add -A  to add all files new files, changes and removed files or for a single file we have to run git add filename.extention e.g git add index.php
+git commit -m  "Your message" to save the changes done in the files.
+git push -u origin master to send your committed changes to a remote repository, where the branch is named as master and the remote named origin.
+ 
+About the git pull command ---->
+For using the pull command, firstly we have to clone our repository or either work on already cloned repository
+Pull command chalane k liye hume phle git clone command chalani padegi ya fir jo hmne phle git clone command chala k apne local computer pr directory bni hai uske ander kam krna padega tabhi pull ki command chalegi nhi toh error aayega.  
+ 
+ 
+ 
+Sandbox account info
+
+Paypal merchant  info
+Email: vikas@webguruz.in
+Pass: Vikas_dev12@wgt
+
+Paypal user info  invalid
+Email: vikas@webguruz.in
+Pass: Dev_vikas@12
+
+===================== authorize.net ====================
+Url: https://sandbox.authorize.net/
+User login id: Gurjinder22
+Pass: Gurjinder@123#@!
+
+
+================= bitbuket account ===============
+Email: vikas@webguruz.in
+Pass: admin123#@!
+
+
+============================Github account ============
+Email: vikas@webguruz.in
+Pass: Vikas_dev12@wgt
+
+
+===========================paypal user info=================
+user: ankpro94@gmail.com
+pass: Admin123#
+
+
+ken@salesforlife.com
+
+===================== twitter account ====================
+Email: vikas@webguruz.in
+Pass: admin123#@!
+
+====================== facebook account ===================
+Url: http://developers.facebook.com/
+Eamil: vikas@webguruz.in
+Pass: admin123
+
