@@ -1,0 +1,66 @@
+================== impo link for create shopify app with the laravel ===========================================
+https://codemason.io/blog/ultimate-guide-building-shopify-app-with-laravel/
+
+========================== impo link for get all service reviews =========================================
+https://developers.trustpilot.com/tutorials/how-to-get-all-your-service-reviews
+
+====================== Create shopify app link php ===========================
+https://github.com/nyalex/shopify-generating-api-token-guide
+
+============================ Using of script tag in shopify ======================================== 
+https://weeklyhow.com/shopify-app-script-tag/
+
+===================== Preg match expresstion explanation ======================================== 
+https://www.guru99.com/php-regular-expressions.html
+
+=========================== Using twig template for shopify app ===================================
+http://zetcode.com/php/twig/
+
+========================== Github commands ================================================
+https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html
+
+=========================== How to Check app proxy url explain below ======================================
+https://testingapp21.myshopify.com/apps/insta-image-feeds/https://dcsahib.com/instagrm-feed/login.php
+
+https://testingapp21.myshopify.com => Our store url
+/apps => Subpath Prefix
+/insta-image-feeds => Subpath
+/https://dcsahib.com/instagrm-feed/login.php => proxy url works only for php file.
+Combine all this and hit on browser and you can check the static data for the proxy.  
+
+And using this in your jquery ajax get method for get the file data onto the frontend with the script api below is code how to call our proxy url file.
+
+ $(document).ready(function(){
+    
+    $.ajax({    //create an ajax request to display.php
+        type: "GET",
+        url: "apps/insta-image-feeds/login.php",             
+        dataType: "html",   //expect html to be returned                
+        success: function(response){
+          //console.log(response);
+          //var parsedResponse = $.parseHTML(response);
+        var instaresult = $(response).filter("#vinsta-feed").html();
+          $('#vinsta-feed').append(instaresult);
+          //alert(parsedResponse);
+         var tweetresult = $(response).filter("#vtweets-feed").html();
+          $('#twitter-feed').append(tweetresult);
+          //$("#vinsta-feed").html(response); 
+          //alert($(response).filter('#vinsta-feed'));
+                //$('#vinsta-feed').append($(this).html());
+         //   alert(response);
+        }
+
+    });
+      });
+ 
+
+
+==================== Set default editor in filezilla =============================== 
+This is for those ubuntu user who installed sublime-text-editor by snap wanted to use in filezilla, they can use this command in "Setting => filetype associations".
+php /snap/bin/subl
+Shopify code snippet
+https://github.com/freakdesign/Shopify-code-snippets
+
+========================= Shopify get all the products from the store if there is more then 250 products follow link ===================== 
+https://www.shopify.in/partners/blog/relative-pagination
+or check my import export app 
