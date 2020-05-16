@@ -1,0 +1,124 @@
+====================Steps to Install wordpress on AWS server===================================
+1. Login into your aws console account.
+2. From services dropdown menu select EC2.
+3. From left sidebar go to instances->instances
+4. click on "Launch Instance" button.
+5. From left sidebar click on "AWS Marketplace" and on search bar write Wordpress and hit enter.
+6. Now you can see the multiple wordpress option to install, select "WordPress Certified by Bitnami and Automattic" click on select button for simple install.
+7. After click on select option you can see a pricing table where AWS shows pricing for that instance but don't worry click on continue button.
+8. From choose instance type click on "General purpose, t2.micro(free tyre eligibile)" checkbox and click "Review and launch button".
+9. Click on "Launch" button.
+10. After that you have to give name of your new key pair in input field and click on download key pair file which is "givenname.pem" file. we will used this file in our next steps to install free ssl other settings.
+11. After download .pem file now click on launch button. your instance set up successfully.
+12. Now select your newly installed instance and you can edit its name from name field and copy "IPv4 Public IP:" address. which is used for our next step to set up our instance into domain url.
+
+==================================== Transfer our instance to domain url ===============
+1. From service dropdown menu found "Networking and content delivery" and select "Route53".
+2. From left sidebar go to Hosted zone->Click create hosted zone-> write the domain name "example.com" on text field and type public hosted zone and click on create button to create new nameserver "ns".
+3. After create your hosted zone click on radio of your newly created zone and click on "Go to record set".
+4. Here click on "create record set", we create two record set one with www and one without www.
+  4.a. In Name field write first with www and second with blank this field.
+  4.b. In Value field paste your IP address which is copy from our instance.
+5. Copy your NS for changing name-server for your domain registrar where you register your domain name.
+6. From your domain nare registrar website select your domain and change its DNS with newly created nameserver.
+
+=================================== Using putty for AWS wordpress instance ============================
+1. download and install putty software on your system from "putty.org". Skip if already installed putty on your system.
+2. go to your system folder where you installed putty i.e. "C:\Program Files\PuTTY".
+3. from this folder click on "puttygen" app and after launch click on "file" and from dropdown click on "load private key" and then browse "keypair" file which you save when you create aws instance, after open file, you will get the popup just click ok.  after that click on "save private key" you will get a instant popup click on "yes" and save your file with a name. It is a .ppk file.
+
+Now after genrate our .ppk file we have to launch "putty" app from same folder.
+1. After app launch you have to put your public ip address on "host name or ip address" field.
+	1.a. Connection type "ssh".
+	1.b. in saved session field enter a name which you want to add for that perticular ip "abc" and click on save button.
+2. From the left sidebar go to connection->ssh->auth and browse you .ppk file from your system.
+3. From the left sidebar go to connection->data and set auto login username as "bitnami", this is default username.
+4. Go to session from left sidebar and then click on "abc" which you save before in 1 step and click on save button to save all the settings.
+5. after save all the settings select your session name i.e. "abc" and click on load button. If there is any popup open then click on "yes". Now you can connect with your aws instance with putty.
+
+Now we have write some commands for install free lets encrpt SSL on our domain.
+
+copy sudo /opt/bitnami/bncert-tool and paste it on your putty app command line.
+
+After run command it will ask you some settings. 
+1. An updated version is available. Would you like to download it? You would need to run it manually later. [Y/n]: y
+2. Domain list here you can add your domain name "abc.com".
+3. The following domains were not included: www.digtarding.com. Do you want to add them? [Y/n]: y
+
+--------------------------------------------------------------------------
+
+Please select the redirections you wish to enable or disable on your Bitnami
+installation.
+
+4. Enable HTTP to HTTPS redirection [Y/n]: y
+5. Enable non-www to www redirection [Y/n]: n
+6. Enable www to non-www redirection [y/N]: y
+
+---------------------------------------------------
+
+7. Do you agree to these changes? [Y/n]: y
+----------------------------------------------------
+
+8. E-mail address []: abc@gmail.com
+
+The Let's Encrypt Subscriber Agreement can be found at:
+
+https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf
+
+9. Do you agree to the Let's Encrypt Subscriber Agreement? [Y/n]: y
+
+
+Success
+
+Here we can successfully install ssl on our domain and set up redirections for our domain.
+
+Press [Enter] to continue: press "Enter" key from your keyboard.
+
+============================================ for open our website db phpmyadmin ==================
+Now again we can go to our "putty" folder and add some settings.
+1. open putty app from your system.
+2. select your session name which you save previously i.e. "abc" and click on load button.
+3. Now from the left sidebar go to Connection->ssh->tunnels and on source port field enter "8888" and destination field enter "localhost:80" and click on add button.
+4. Go to session from left sidebar and then click on "abc" which you save before click on save button to save all the settings.
+5. after save all the settings select your session name i.e. "abc" and click on load button. If there is any popup open then click on "yes". Now you can connect with your aws instance with putty.
+6. now go to your browser and write localhost:8888/phpmyadmin
+7. here you can get the access of your website db. 
+
+login details for phpmyadmin
+username: root
+password: same as your wp admin password.
+
+By default db name is bitnami_wordpress.
+
+===================================================== login wp admin ======================
+1. login your website wp admin and go to the setting->genral  and check WordPress Address (URL) and Site Address (URL). 
+if these are not changed to https://abc.com then install a plugin "really simple ssl" and run below command for change permission of wordpress files.
+
+Give write permissions
+sudo chmod 660 /opt/bitnami/apps/wordpress/htdocs/wp-config.php
+sudo chmod 777 /opt/bitnami/apps/wordpress/htdocs/wp-content
+
+Go back to your website admin panle and go to settings->ssl and click on "go ahead and active ssl" button.
+go to the setting->genral  and check WordPress Address (URL) and Site Address (URL). 
+
+After changes done run following command.
+Install the plugin
+Restore original permissions
+
+sudo chmod 640 /opt/bitnami/apps/wordpress/htdocs/wp-config.php
+sudo chmod 775 /opt/bitnami/apps/wordpress/htdocs/wp-content
+
+====================================================== Now We can open our website into Sftp you can used Filezilla or winscp or any tool which you can used easyly ==========================================
+
+I am using winscp for this. 
+First go to new site. 
+
+1. Select sftp from the dropdown
+2. enter host name or ip.
+3. Enter username as "bitnami" by default.
+4. password same as your wp admin password.
+5 most important part go to "advanced" a popup open from the left sidebar SSH->authentication and browse your .ppk file and click on ok button.
+6. now click on save button and enter the site name and choose a folder or create a new one and click on ok.
+7. click on login and go to apps->wordpress->htdocs folder here you can see your wordpress all files.
+
+
