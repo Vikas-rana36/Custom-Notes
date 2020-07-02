@@ -108,6 +108,11 @@ Restore original permissions
 sudo chmod 640 /opt/bitnami/apps/wordpress/htdocs/wp-config.php
 sudo chmod 775 /opt/bitnami/apps/wordpress/htdocs/wp-content
 
+give permission to edit plugin and theme files
+
+sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/wp-content
+sudo chmod -R g+w /opt/bitnami/apps/wordpress/htdocs/wp-content
+
 ====================================================== Now We can open our website into Sftp you can used Filezilla or winscp or any tool which you can used easyly ==========================================
 
 I am using winscp for this. 
@@ -120,5 +125,31 @@ First go to new site.
 5 most important part go to "advanced" a popup open from the left sidebar SSH->authentication and browse your .ppk file and click on ok button.
 6. now click on save button and enter the site name and choose a folder or create a new one and click on ok.
 7. click on login and go to apps->wordpress->htdocs folder here you can see your wordpress all files.
+
+=============================================================== important commands and links ================================================
+commnd for edit php.ini file
+
+nano /opt/bitnami/php/etc/php.ini
+
+Whenever you are done with the file, press CTRL+X, answer "Yes" and press "Enter" to save the file.
+
+// start stop services
+sudo /opt/bitnami/ctlscript.sh stop mysql
+sudo /opt/bitnami/ctlscript.sh start mysql
+
+// check error log
+sudo tail -n 200 /opt/bitnami/mysql/data/mysqld.log
+
+modify disk space for a ec2 instance
+https://docs.bitnami.com/aws/how-to/modify-ebs-volume/
+
+// chk smtp host cmd
+telnet smtp.gmail.com 465
+
+
+sudo apt-get update 
++++++++
+which sendmail
+sudo /opt/bitnami/ctlscript.sh restart
 
 
